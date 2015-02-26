@@ -2,7 +2,7 @@ function ausgesucht(wert){
 	var value = wert.value;
 	
 	rechtsZurueckSetzen();
-	$("<iframe class='mainContent' src='"+value+"' marginwidth='0' marginheight='10' noresize scrolling='auto'></iframe>").appendTo($("#Rechts"));
+	$('<div/>').html("<iframe class='mainContent' src='"+value+"' style='margin:0; width:100%; height:150px; border:none; overflow:hidden;' scrolling='no' onload='resizeIframe(this);'></iframe>").appendTo("#Rechts");
 	
 	$("#sb button").each( function( index, element ){
 		//console.log( $( this ).text()+" "+ $( this ).val() );
@@ -40,3 +40,8 @@ function rechtsZurueckSetzen(){
 		}
 	}
 }
+
+ function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
+ 

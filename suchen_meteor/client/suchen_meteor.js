@@ -1,89 +1,52 @@
-Tasks = new Mongo.Collection('tasks');
+entries = new Mongo.Collection('entries');
 
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-
-  Template.body.helpers({
-   // tasks: [
-  //    { text: "This is task 1" },
-    //  { text: "This is task 2" },
-    //  { text: "This is task 3" }
-   // ]
-  });
-
-  Template.tasksTemplate.helpers({
-    //tasks : [{ text: "This is task 1" },
-    //  { text: "This is task 2" },
-    //  { text: "This is task 3" }]
-    tasks : function(){
-      var elements = Tasks.find().fetch();
-      console.log("result " + JSON.stringify(elements));
+  Template.entryTemplate.helpers({
+    entries : function(){
+      var elements = entries.find().fetch();
+      // console.log("result " + JSON.stringify(elements));
       return elements;
     }
 
   });
 
-
-
-
-  Template.addTask.events({
+  Template.addEntry.events({
     'submit form': function(event){
+      // Prevent the browser from applying default behaviour to the form
+      event.preventDefault();
 
-        // Prevent the browser from applying default behaviour to the form
-        event.preventDefault();
+      // Get the value from the "task" text field
+      var entryName = event.target.entryName.value;
+      var entryValue = event.target.entryValue.value;
 
-        // Get the value from the "task" text field
-        taskVar = event.target.Task.value;
+      console.log("tst " + entryName + " " + entryValue);
 
-        // Call a Meteor method and pass through a name
-        // console.log("insert " + taskVar);
-        Meteor.call('insertTask', taskVar);
-        var tasks = Tasks.find().fetch();
-        for(i = 0; i<tasks.length; i++){
-          console.log(i+ " "+ JSON.stringify(tasks[i]));
-        }
+
+      // Call a Meteor method and pass through a name
+      Meteor.call('insertEntry', entryName, entryValue);
     }
   });
 
-  Template.body.events({
+  Template.entry.events({
     'click': function(event){
-      console.log("body event "+this.name+" "+ JSON.stringify(this));
-    }
-  });
-
-  Template.task.events({
-    'click': function(event){
-      //   console.log("click event "+this.name+" "+ JSON.stringify(this));
-      Session.set("selectedTaskName", this.name);
+      // console.log("click event " + this._id + " " + this.name);
+      Session.set("selectedEntryId", this._id);
     },
     'mouseover': function(event){
-      //    console.log("task mouseover event "+this.name+" "+ this.value +" "+ JSON.stringify(this));
-      Session.set("mouseoverTaskName", this.name);
+      // console.log("task mouseover event " + this._id + " " + this.entryName);
+      Session.set("mouseoverEntryId", this._id);
     }
   });
 
-  Template.task.helpers({
-    'selTask':function(){
-      var shade = Session.get("mouseoverTaskName");
-      var selected = Session.get("selectedTaskName");
-      if(this.name == selected){
+  Template.entry.helpers({
+    'selectEntry':function(){
+      var shade = Session.get("mouseoverEntryId");
+      var selected = Session.get("selectedEntryId");
+      if(this._id == selected){
         return "selected";
       }
-      if(this.name == shade){
+      if(this._id == shade){
         return "shade";
       }
     }

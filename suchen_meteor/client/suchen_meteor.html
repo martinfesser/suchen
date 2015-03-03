@@ -1,37 +1,33 @@
 <head>
-  <title>suchen_meteor</title>
+  <title>Search Meteor</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+    <h1>Search with meteor</h1>
 
-  {{> hello}}
+    {{> addEntry}}
 
     <ul>
-      {{> addTask}}
-      {{> tasksTemplate}}
+        {{> entryTemplate}}
     </ul>
-
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
 
-<template name="addTask">
+<template name="addEntry">
   <form>
-     <input type="text" name="Task">
-     <input type="submit" value="Add Task">
+      <input type="text" name="entryName">
+      <input type="text" name="entryValue">
+      <input type="submit" value="Add Entry">
   </form>
 </template>
 
-<template name="tasksTemplate">
-    {{#each tasks}}
-      {{> task}}
+<template name="entryTemplate">
+    {{#each entries}}
+        {{> entry}}
     {{/each}}
 </template>
 
-<template name="task">
-  <li class="task {{selTask}}">{{name}}</li>
+<template name="entry">
+    <!--{{create}} {{update}}-->
+    <li class="Entry {{selectEntry}}">{{entryName}} {{entryValue}} </li>
 </template>

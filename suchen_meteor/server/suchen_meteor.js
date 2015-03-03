@@ -1,38 +1,40 @@
-Tasks = new Mongo.Collection('tasks');
+entries = new Mongo.Collection('entries');
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
 	  // Tasks.remove({});
     console.log("current tasks: " );
-    var tasks = Tasks.find().fetch();
-    for(i = 0; i<tasks.length; i++){
-      console.log(i+ " "+ JSON.stringify(tasks[i]));
+    var entriess = entries.find().fetch();
+    for(i = 0; i<entriess.length; i++) {
+      console.log(i+ " "+ JSON.stringify(entriess[i]));
     }
 
   });
 
   Meteor.methods({
-    'insertTask': function(taskVar){
-      // Get the ID of the current user
-      //var currentUserId = Meteor.userId();
-      var existing = Tasks.find({name : taskVar});
+    'insertEntry': function(entryName, entryValue) {
 
-      // not transactional afaik
-      if(existing.count() == 0){
+      console.log("tst " + entryName + " " + entryValue);
+
+      // Get the ID of the current user
+      var existing = entries.find({'entryName' : entryName});
+
+      console.log("tst " + entryName + " " + entryValue + " " + existing.count());
+
+      // TODO: not transactional afaik, how would/could I do that?
+      if(existing.count() == 0) {
         // Insert the data of a new player
-        Tasks.insert({
-            name: taskVar
+        var currentDate = new Date();
+
+        entries.insert({
+          entryName: entryName,
+          entryValue: entryValue,
+          create: currentDate,
+          update: currentDate
         });
       }
-
-      console.log("insert " + taskVar+ " "+ Tasks.find().count());
-      var tasks = Tasks.find().fetch();
-      for(i = 0; i<tasks.length; i++){
-        console.log(i+ " "+ JSON.stringify(tasks[i]));
-      }
     }
-
   });
 
 

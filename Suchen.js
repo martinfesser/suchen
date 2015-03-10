@@ -43,16 +43,16 @@ function Suchen(SuchText) {
    for (i=0; (i<SuchTab.length) && (AnzErg<50); i++) {
       TabZeile = SuchTab[i][1,0].toUpperCase();
       gefunden = true;
-	  $.each(Text, function(index, value){
-		  if ((value.length!=0) && (value!= "*")) {
+      $.each(Text, function(index, value){
+          if ((value.length!=0) && (value!= "*")) {
                if (TabZeile.indexOf(value)==-1) {
                   gefunden = false;
                }
             }
-	  });
+      });
 
       if (gefunden) {
-		 Erg = Erg + "<li><button type='button' class='btn btn-link' onclick='ausgesucht(this);' value='" + SuchTab[i][0,1] + "'>" + SuchTab[i][1,0] + "</button></li>";
+         Erg = Erg + "<li><button type='button' onclick='ausgesucht(this);' value='" + SuchTab[i][0,1] + "'>" + SuchTab[i][1,0] + "</button></li>";
          AnzErg ++;
       }
    }
@@ -60,4 +60,4 @@ function Suchen(SuchText) {
    return Erg;
 
 }            // Ende Suchen
-		
+        

@@ -1,5 +1,3 @@
-entries = new Mongo.Collection('entries');
-
 if (Meteor.isClient) {
 
   Template.entryTemplate.helpers({
@@ -8,7 +6,6 @@ if (Meteor.isClient) {
       // console.log("result " + JSON.stringify(elements));
       return elements;
     }
-
   });
 
   Template.addEntry.events({
@@ -32,6 +29,7 @@ if (Meteor.isClient) {
     'click': function(event){
       // console.log("click event " + this._id + " " + this.name);
       Session.set("selectedEntryId", this._id);
+
     },
     'mouseover': function(event){
       // console.log("task mouseover event " + this._id + " " + this.entryName);

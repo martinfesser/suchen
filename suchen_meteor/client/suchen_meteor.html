@@ -6,6 +6,8 @@
     <h1>Search with meteor</h1>
 
     {{> addEntry}}
+    {{> insertEntryForm}}
+    {{> updateEntry}}
 
     <ul>
         {{> entryTemplate}}
@@ -20,6 +22,9 @@
       <input type="submit" value="Add Entry">
   </form>
 </template>
+
+
+
 
 <template name="entryTemplate">
     {{#each entries}}

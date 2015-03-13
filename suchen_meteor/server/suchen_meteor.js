@@ -1,4 +1,4 @@
-entries = new Mongo.Collection('entries');
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {

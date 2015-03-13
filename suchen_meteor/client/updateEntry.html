@@ -1,0 +1,16 @@
+<template name="insertEntryForm">
+  <!--
+  {{> quickForm collection="entries" id="insertEntryForm" type="insert"}}
+-->
+</template>
+
+<template name="updateEntry">
+  <!--
+  {{> quickForm collection="entries" doc=this id="updateBookForm" type="update"}}
+  -->
+  <form>
+      <input type="text" class="entryName" name="entryName">
+      <input type="text" class="entryValue" name="entryValue">
+      <input type="submit" value="Update Entry">
+  </form>
+</template>

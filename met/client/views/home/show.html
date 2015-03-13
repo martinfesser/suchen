@@ -1,0 +1,34 @@
+<template name="showTab">
+    {{> topShow }}
+    {{> mainShow}}
+</template>
+
+<template name="topShow">
+    <div class="ui three buttons">
+        <button class="ui active button" onclick="window.location.href='/show'"
+                data-tab="showTab">Anzeigen</button>
+        <button class="ui button" onclick="window.location.href='/create'"
+                data-tab="createTab">Anlegen</button>
+        <button class="ui button" onclick="window.location.href='/update'"
+                data-tab="updateTab">Anpassen</button>
+    </div>
+</template>
+
+<!--
+<a href="{{pathFor 'dashboard'}}" class="btn btn-success"><i class="fa fa-dashboard"></i> Go to dashboard</a>
+-->
+
+<template name="mainShow">
+    <div class="ui grid">
+        <div class="sixteen wide column"></div>
+        <div class="four wide column"> {{> search}} </div>
+        <div class="twelve wide column"> {{> dataShow}}</div>
+    </div>
+</template>
+
+<template name="dataShow">
+    <div class="ui grid">
+        <div class="twelve wide column">Show main</div>
+
+    </div>
+</template>

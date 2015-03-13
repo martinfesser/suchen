@@ -1,0 +1,34 @@
+<template name="createTab">
+    {{> topCreate }}
+    {{> mainCreate}}
+</template>
+
+<template name="topCreate">
+    <div class="ui three buttons">
+        <button class="ui button" onclick="window.location.href='/show'"
+                data-tab="showTab">Anzeigen</button>
+        <button class="ui active button" onclick="window.location.href='/create'"
+                data-tab="createTab">Anlegen</button>
+        <button class="ui button" onclick="window.location.href='/update'"
+                data-tab="updateTab">Anpassen</button>
+    </div>
+</template>
+
+<!--
+<a href="{{pathFor 'dashboard'}}" class="btn btn-success"><i class="fa fa-dashboard"></i> Go to dashboard</a>
+-->
+
+<template name="mainCreate">
+    <div class="ui grid">
+        <div class="sixteen wide column"></div>
+        <div class="four wide column"> {{> search}} </div>
+        <div class="twelve wide column"> {{> dataCreate}}</div>
+    </div>
+</template>
+
+<template name="dataCreate">
+    <div class="ui grid">
+        <div class="twelve wide column">Create main</div>
+
+    </div>
+</template>
